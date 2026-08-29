@@ -107,4 +107,12 @@ static/CNAME           커스텀 도메인
 ## 배포
 
 `main`에 푸시하면 `.github/workflows/deploy.yml`이 Hugo로 빌드해 GitHub Pages에 올립니다.
-커스텀 도메인은 `static/CNAME`과 저장소 Settings → Pages의 Custom domain 설정을 함께 씁니다.
+
+처음 한 번은 저장소 **Settings → Pages**에서 직접 켜야 합니다. Actions의 `GITHUB_TOKEN`으로는
+Pages 사이트를 새로 만들 수 없기 때문입니다.
+
+1. **Source**를 `GitHub Actions`로 지정
+2. **Custom domain**에 `recipes.metacog.co.kr` 입력 (저장소에는 `static/CNAME`으로도 들어 있습니다)
+3. DNS가 확인되면 **Enforce HTTPS** 체크
+
+이후로는 `main`에 푸시할 때마다 자동 배포됩니다. Actions 탭에서 수동 실행(workflow_dispatch)도 가능합니다.
