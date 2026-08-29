@@ -40,12 +40,13 @@ Hugo는 **extended 0.157.0 이상**이 필요합니다 (테마 요구사항). SC
    prepTime: "10분"
    cookTime: "25분"
    chillTime: "재우기 30분"           # 선택 — 재우기·불리기·냉장 시간
+   fermentTime: "실온 1~2일"          # 선택 — 김치처럼 발효·숙성이 필요한 경우
    servings: "2인분"
    difficulty: "쉬움"                 # 쉬움 / 보통 / 어려움
    ---
    ```
 
-   `prepTime`, `cookTime`, `chillTime`, `servings`, `difficulty`는 본문 위 요약 바와
+   `prepTime`, `cookTime`, `chillTime`, `fermentTime`, `servings`, `difficulty`는 본문 위 요약 바와
    목록 카드의 칩으로 자동 렌더링됩니다. 없는 항목은 그냥 빠집니다.
 
 2. 본문에서 쓸 수 있는 숏코드:

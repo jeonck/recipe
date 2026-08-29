@@ -7,6 +7,7 @@
 {{- with $p.prepTime }}{{ $facts = $facts | append (dict "icon" "🔪" "label" "준비" "value" .) }}{{ end -}}
 {{- with $p.cookTime }}{{ $facts = $facts | append (dict "icon" "🔥" "label" "조리" "value" .) }}{{ end -}}
 {{- with $p.chillTime }}{{ $facts = $facts | append (dict "icon" "🧊" "label" "냉장" "value" .) }}{{ end -}}
+{{- with $p.fermentTime }}{{ $facts = $facts | append (dict "icon" "🫙" "label" "숙성" "value" .) }}{{ end -}}
 {{- with $p.servings }}{{ $facts = $facts | append (dict "icon" "🍚" "label" "분량" "value" .) }}{{ end -}}
 {{- with $p.difficulty }}{{ $facts = $facts | append (dict "icon" "⭐" "label" "난이도" "value" .) }}{{ end -}}
 {{- if $facts -}}

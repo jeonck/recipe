@@ -40,6 +40,7 @@
     {{ if $IsList }}
         {{ with $Page.Params.cookTime }}{{ $chips = $chips | append (printf "🔥 %s" .) }}{{ end }}
         {{ with $Page.Params.chillTime }}{{ $chips = $chips | append (printf "🧊 %s" .) }}{{ end }}
+        {{ with $Page.Params.fermentTime }}{{ $chips = $chips | append (printf "🫙 %s" .) }}{{ end }}
         {{ with $Page.Params.servings }}{{ $chips = $chips | append (printf "🍚 %s" .) }}{{ end }}
         {{ with $Page.Params.difficulty }}{{ $chips = $chips | append (printf "⭐ %s" .) }}{{ end }}
     {{ end }}
