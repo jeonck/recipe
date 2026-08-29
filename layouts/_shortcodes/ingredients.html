@@ -1,0 +1,11 @@
+{{- /* 재료 목록 박스.
+       {{< ingredients >}} … {{< /ingredients >}}             제목 없이 박스만
+       {{< ingredients title="양념" >}} … {{< /ingredients >}}  제목 줄 포함 */ -}}
+<div class="ingredients">
+    {{- with .Get "title" }}
+    <div class="ingredients__title">{{ . }}</div>
+    {{- end }}
+    <div class="ingredients__body">
+        {{ .Inner | .Page.RenderString (dict "display" "block") }}
+    </div>
+</div>

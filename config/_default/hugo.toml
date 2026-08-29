@@ -1,0 +1,22 @@
+baseURL                = "https://recipes.metacog.co.kr/"
+languageCode           = "ko-kr"
+defaultContentLanguage = "ko"
+hasCJKLanguage         = true
+title                  = "메타쿡"
+theme                  = "hugo-theme-stack"
+
+enableRobotsTXT  = true
+enableEmoji      = true
+summaryLength    = 30
+timeZone         = "Asia/Seoul"
+
+[pagination]
+    pagerSize = 12
+
+[permalinks]
+    recipes = "/r/:slug/"
+    page    = "/:slug/"
+
+[taxonomies]
+    category = "categories"
+    tag      = "tags"

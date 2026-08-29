@@ -1,0 +1,7 @@
+{{- /* 요리 팁 콜아웃. 사용법: {{< tip title="실패 없이" >}} ... {{< /tip >}} */ -}}
+<aside class="tip">
+    <div class="tip__title">💡 {{ .Get "title" | default "요리 팁" }}</div>
+    <div class="tip__body">
+        {{ .Inner | .Page.RenderString (dict "display" "block") }}
+    </div>
+</aside>

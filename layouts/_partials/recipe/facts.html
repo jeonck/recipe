@@ -1,0 +1,22 @@
+{{- /*
+    레시피 요약 바. 프런트매터에 조리 정보가 하나라도 있을 때만 그린다.
+    입력: Page
+*/ -}}
+{{- $p := .Params -}}
+{{- $facts := slice -}}
+{{- with $p.prepTime }}{{ $facts = $facts | append (dict "icon" "🔪" "label" "준비" "value" .) }}{{ end -}}
+{{- with $p.cookTime }}{{ $facts = $facts | append (dict "icon" "🔥" "label" "조리" "value" .) }}{{ end -}}
+{{- with $p.chillTime }}{{ $facts = $facts | append (dict "icon" "🧊" "label" "냉장" "value" .) }}{{ end -}}
+{{- with $p.servings }}{{ $facts = $facts | append (dict "icon" "🍚" "label" "분량" "value" .) }}{{ end -}}
+{{- with $p.difficulty }}{{ $facts = $facts | append (dict "icon" "⭐" "label" "난이도" "value" .) }}{{ end -}}
+{{- if $facts -}}
+<div class="recipe-facts">
+    {{- range $facts }}
+    <div class="recipe-fact">
+        <span class="recipe-fact__icon" aria-hidden="true">{{ .icon }}</span>
+        <span class="recipe-fact__label">{{ .label }}</span>
+        <span class="recipe-fact__value">{{ .value }}</span>
+    </div>
+    {{- end }}
+</div>
+{{- end -}}

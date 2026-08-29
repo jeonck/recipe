@@ -1,0 +1,4 @@
+{{- /* 번호가 붙은 조리 순서. 안쪽에는 마크다운 순서 목록을 넣는다. */ -}}
+<div class="steps">
+    {{ .Inner | .Page.RenderString (dict "display" "block") }}
+</div>

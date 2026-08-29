@@ -1,0 +1,11 @@
+# Hugo 빌드 산출물
+/public/
+/resources/_gen/
+/.hugo_build.lock
+hugo_stats.json
+
+# 로컬 도구
+node_modules/
+__pycache__/
+.DS_Store
+assets/jsconfig.json

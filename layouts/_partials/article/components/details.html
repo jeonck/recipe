@@ -1,0 +1,83 @@
+{{- /*
+    테마 기본 partial에 목록 카드용 조리 정보(시간/분량/난이도)를 덧붙인 버전.
+*/ -}}
+{{- $IsList := .IsList -}}
+{{- $Page := .Page -}}
+<div class="article-details">
+    {{ if $Page.Params.categories }}
+    <header class="article-category">
+        {{ range ($Page.GetTerms "categories") }}
+            {{ $color := partial "helper/color-from-str" .LinkTitle }}
+            {{ $BackgroundColor := default $color.BackgroundColor .Params.style.background }}
+            {{ $TextColor := default $color.TextColor .Params.style.color }}
+            <a href="{{ .RelPermalink }}" style="background-color: {{ $BackgroundColor | safeCSS }}; color: {{ $TextColor | safeCSS }};">
+                {{ .LinkTitle }}
+            </a>
+        {{ end }}
+    </header>
+    {{ end }}
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="{{ $Page.RelPermalink }}">
+                {{- $Page.Title -}}
+            </a>
+        </h2>
+
+        {{ with $Page.Params.description }}
+        <h3 class="article-subtitle">
+            {{ . }}
+        </h3>
+        {{ end }}
+    </div>
+
+    {{ $showDate := not $Page.Date.IsZero }}
+    {{ $showTranslations := $Page.IsTranslated }}
+    {{ $showTags := and $Page.Site.Params.Article.List.ShowTags ($Page.GetTerms "tags") $IsList }}
+
+    {{/* 목록 카드에서는 날짜보다 조리 정보가 쓸모 있어서 칩으로 먼저 보여준다. */}}
+    {{ $chips := slice }}
+    {{ if $IsList }}
+        {{ with $Page.Params.cookTime }}{{ $chips = $chips | append (printf "🔥 %s" .) }}{{ end }}
+        {{ with $Page.Params.chillTime }}{{ $chips = $chips | append (printf "🧊 %s" .) }}{{ end }}
+        {{ with $Page.Params.servings }}{{ $chips = $chips | append (printf "🍚 %s" .) }}{{ end }}
+        {{ with $Page.Params.difficulty }}{{ $chips = $chips | append (printf "⭐ %s" .) }}{{ end }}
+    {{ end }}
+
+    {{ if or $showDate $showTranslations $showTags $chips }}
+    <footer class="article-meta">
+        {{ if $chips }}
+            <div class="recipe-chips">
+                {{ range $chips }}<span class="recipe-chip">{{ . }}</span>{{ end }}
+            </div>
+        {{ end }}
+
+        {{ if $showDate }}
+            <div class="inline-meta">
+                {{ partial "helper/icon" "date" }}
+                <time class="article-time--published" datetime='{{ $Page.Date.Format "2006-01-02T15:04:05Z07:00" }}'>
+                    {{- $Page.Date | time.Format $Page.Site.Params.dateFormat.published -}}
+                </time>
+            </div>
+        {{ end }}
+
+        {{ if $showTranslations }}
+            <div class="inline-meta">
+                {{ partial "helper/icon" "language" }}
+                {{ range $Page.Translations }}
+                    <a href="{{ .RelPermalink }}" class="link">{{ .Language.Label }}</a>
+                {{ end }}
+            </div>
+        {{ end }}
+
+        {{ if $showTags }}
+            <div class="article-tags inline-meta">
+                {{ partial "helper/icon" "tag" }}
+                {{ range ($Page.GetTerms "tags") }}
+                    <a href="{{ .RelPermalink }}" class="link">{{ .LinkTitle }}</a>
+                {{ end }}
+            </div>
+        {{ end }}
+    </footer>
+    {{ end }}
+</div>

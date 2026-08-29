@@ -1,0 +1,234 @@
+/* 메타쿡 커스텀 스타일 — Stack 테마 위에 레시피용 컴포넌트만 얹는다.
+   주의: 테마가 html { font-size: 62.5% } 를 쓰므로 1rem = 10px 기준이다. */
+
+:root {
+    --recipe-accent: #c0392b;
+    --recipe-accent-soft: rgba(192, 57, 43, 0.08);
+    --recipe-accent-border: rgba(192, 57, 43, 0.2);
+    --recipe-surface: #fffaf6;
+    --recipe-line: rgba(0, 0, 0, 0.08);
+}
+
+[data-scheme="dark"] {
+    --recipe-accent: #ff8a6b;
+    --recipe-accent-soft: rgba(255, 138, 107, 0.1);
+    --recipe-accent-border: rgba(255, 138, 107, 0.24);
+    --recipe-surface: rgba(255, 255, 255, 0.035);
+    --recipe-line: rgba(255, 255, 255, 0.1);
+}
+
+/* ── 레시피 요약 바 ─────────────────────────────── */
+.recipe-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1px;
+    margin: 0 0 3.2rem;
+    background: var(--recipe-line);
+    border: 1px solid var(--recipe-line);
+    border-radius: 1.2rem;
+    overflow: hidden;
+}
+
+.recipe-fact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.6rem 0.8rem;
+    background: var(--recipe-surface);
+    text-align: center;
+
+    &__icon {
+        font-size: 2.2rem;
+        line-height: 1;
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        letter-spacing: 0.05em;
+        color: var(--card-text-color-tertiary);
+    }
+
+    &__value {
+        font-size: 1.5rem;
+        line-height: 1.4;
+        font-weight: 600;
+        color: var(--card-text-color-main);
+    }
+}
+
+/* ── 목록 카드의 조리 정보 칩 ────────────────────── */
+.recipe-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.2rem;
+}
+
+.recipe-chip {
+    font-size: 1.3rem;
+    line-height: 2;
+    padding: 0 1rem;
+    border-radius: 999px;
+    background: var(--recipe-accent-soft);
+    border: 1px solid var(--recipe-accent-border);
+    color: var(--card-text-color-secondary);
+    white-space: nowrap;
+}
+
+/* ── 재료 박스 ──────────────────────────────────── */
+.ingredients {
+    margin: 2rem 0;
+    border: 1px solid var(--recipe-line);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: var(--recipe-surface);
+
+    &__title {
+        padding: 1rem 1.8rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        background: var(--recipe-accent-soft);
+        border-bottom: 1px solid var(--recipe-line);
+        color: var(--card-text-color-main);
+    }
+
+    &__body {
+        padding: 1.2rem 2rem 1.6rem;
+
+        ul {
+            margin: 0.6rem 0;
+            padding-left: 1.6rem;
+            list-style: none;
+        }
+
+        li {
+            position: relative;
+            margin: 0.5rem 0;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: -1.4rem;
+                top: 0.62em;
+                width: 0.6rem;
+                height: 0.6rem;
+                border-radius: 50%;
+                background: var(--recipe-accent);
+                opacity: 0.6;
+            }
+        }
+
+        /* 재료 그룹 이름(주재료 / 양념 …) */
+        p {
+            margin: 1.6rem 0 0.2rem;
+            font-weight: 700;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+            color: var(--recipe-accent);
+        }
+
+        > :first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+/* ── 조리 순서 ──────────────────────────────────── */
+.steps {
+    counter-reset: step;
+
+    ol {
+        list-style: none;
+        margin: 1.6rem 0;
+        padding: 0;
+    }
+
+    ol > li {
+        counter-increment: step;
+        position: relative;
+        margin: 0 0 1.2rem;
+        padding: 1.4rem 1.8rem 1.4rem 5.4rem;
+        border: 1px solid var(--recipe-line);
+        border-radius: 1rem;
+        background: var(--recipe-surface);
+
+        &::before {
+            content: counter(step);
+            position: absolute;
+            left: 1.6rem;
+            top: 1.4rem;
+            width: 2.8rem;
+            height: 2.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--recipe-accent);
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        > p:first-child { margin-top: 0; }
+        > p:last-child { margin-bottom: 0; }
+    }
+}
+
+/* ── 요리 팁 ────────────────────────────────────── */
+.tip {
+    margin: 2.4rem 0;
+    padding: 1.6rem 2rem;
+    border-left: 3px solid var(--recipe-accent);
+    border-radius: 0 1rem 1rem 0;
+    background: var(--recipe-accent-soft);
+
+    &__title {
+        font-weight: 700;
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
+        color: var(--card-text-color-main);
+    }
+
+    &__body {
+        > :first-child { margin-top: 0; }
+        > :last-child { margin-bottom: 0; }
+
+        ul {
+            margin: 0.6rem 0;
+            padding-left: 2rem;
+        }
+
+        li { margin: 0.4rem 0; }
+    }
+}
+
+@media (max-width: 560px) {
+    .recipe-facts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 커버가 접시를 가운데 둔 그림이라, 목록 카드에서 위아래가 잘리지 않도록
+   테마 기본값(150/200/250px)보다 이미지 영역을 조금 키운다. */
+:root {
+    --article-image-height: 190px;
+}
+
+@media (min-width: 768px) {
+    :root {
+        --article-image-height: 240px;
+    }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --article-image-height: 300px;
+    }
+}
+
+/* 카테고리 타일 제목이 커버 위에서도 읽히도록 그림자를 준다. */
+.article-list--tile article .article-title {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}

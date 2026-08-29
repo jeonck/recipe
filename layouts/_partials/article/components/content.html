@@ -1,0 +1,8 @@
+{{- /* 테마 기본 partial에 레시피 요약 바를 얹은 버전. */ -}}
+<section class="article-content">
+    {{ partial "recipe/facts" . }}
+
+    <!-- Refer to https://discourse.gohugo.io/t/responsive-tables-in-markdown/10639/5 -->
+    {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
+    {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+</section>

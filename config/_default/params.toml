@@ -1,0 +1,49 @@
+mainSections   = ["recipes"]
+rssFullContent = true
+favicon        = "img/favicon.png"
+
+[footer]
+    since      = 2026
+    customText = "모든 레시피는 집에서 직접 만들어 볼 수 있도록 계량과 순서를 정리했습니다."
+
+[dateFormat]
+    published   = "2006년 1월 2일"
+    lastUpdated = "2006년 1월 2일"
+
+[sidebar]
+    compact  = false
+    emoji    = "🍳"
+    subtitle = "오늘 뭐 먹지? 계량까지 적어둔 집밥 레시피 아카이브."
+    avatar   = "img/avatar.png"
+
+[article]
+    headingAnchor = true
+    math          = false
+    toc           = true
+    readingTime   = false
+
+    [article.list]
+        showTags = true
+
+    [article.license]
+        enabled = false
+
+[widgets]
+    homepage = [
+        { type = "search" },
+        { type = "categories", params = { limit = 10 } },
+        { type = "tag-cloud", params = { limit = 20 } },
+    ]
+    page = [
+        { type = "toc" },
+    ]
+
+[colorScheme]
+    toggle  = true
+    default = "auto"
+
+[comments]
+    enabled = false
+
+[opengraph.twitter]
+    card = "summary_large_image"
