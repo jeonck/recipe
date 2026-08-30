@@ -41,3 +41,11 @@
 
     [social.params]
         icon = "brand-github"
+
+[[social]]
+    identifier = "sponsor"
+    name       = "후원하기"
+    url        = "https://github.com/sponsors/jeonck"
+
+    [social.params]
+        icon = "heart"
