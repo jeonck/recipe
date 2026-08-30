@@ -31,3 +31,19 @@ description: "메타쿡이 레시피를 적는 방식."
 
 레시피에 틀린 부분이 있거나 더 나은 방법을 알고 계시면
 [GitHub 저장소](https://github.com/jeonck/recipe)로 알려주세요.
+
+## 💛 이 레시피가 도움이 되셨나요?
+
+<div style="text-align:center; padding:1.5rem; background:linear-gradient(135deg,#fff9c4 0%,#fffde7 100%); border-radius:12px; border:1px solid #f9a825; margin:1rem 0;">
+  <p style="font-size:1.05rem; color:#4a4a4a; margin-bottom:1rem;">
+    ☕ 커피 한 잔 값의 후원이 새로운 레시피를 만들고 기록하는 데 큰 힘이 됩니다.
+  </p>
+  <a href="https://github.com/sponsors/jeonck" target="_blank" rel="noopener noreferrer"
+     style="display:inline-flex;align-items:center;gap:0.5rem;background:#ea4aaa;color:#fff;padding:0.75rem 1.75rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:0 2px 8px rgba(234,74,170,0.3);">
+    <svg height="20" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;">
+      <path d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5z"/>
+    </svg>
+    GitHub Sponsors로 후원하기
+  </a>
+  <p style="font-size:0.85rem;color:#888;margin-top:0.75rem;">GitHub 계정이 있으면 1회 또는 매월 후원할 수 있습니다.</p>
+</div>
