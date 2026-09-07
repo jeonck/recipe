@@ -7,7 +7,7 @@ image: cover.png
 categories: ["디저트"]
 tags: ["티라미수", "노오븐", "커피", "손님 초대"]
 prepTime: "25분"
-chillTime: "4시간"
+chillTime: "냉장 4시간"
 servings: "4컵"
 difficulty: "쉬움"
 ---
