@@ -40,7 +40,7 @@ difficulty: "쉬움"
 {{< /ingredients >}}
 
 감자·연근·두부 조림, 소고기 장조림, 간장 불고기에 그대로 쓰면 됩니다.
-[감자조림]({{< ref "/recipes/gamja-jorim" >}})이 이 배합에 물엿을 더한 형태예요.
+[감자조림]({{< relref "/recipes/gamja-jorim" >}})이 이 배합에 물엿을 더한 형태예요.
 
 ## 2. 초고추장
 
