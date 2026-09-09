@@ -2,14 +2,16 @@
 """레시피 커버 이미지 생성기.
 
 음식 사진 대신, 위에서 내려다본 접시를 단순한 도형으로 그린 플랫 일러스트를 만든다.
-팔레트는 각 레시피의 첫 번째 카테고리에서 고르고, 폴더 이름을 시드로 써서
-같은 레시피는 몇 번을 돌려도 같은 그림이 나온다.
+팔레트는 각 레시피의 첫 번째 카테고리에서 고르되, 폴더 이름을 시드로
+색조를 조금씩 흔들어 같은 카테고리 안에서도 카드끼리 구분되게 한다.
+시드가 같으면 몇 번을 돌려도 같은 그림이 나온다.
 
     python3 scripts/gen_covers.py            # cover.png 없는 레시피만 생성
     python3 scripts/gen_covers.py --force    # 전부 다시 생성
 
 content/recipes/ 아래 페이지 번들을 직접 훑기 때문에 따로 목록을 관리할 필요가 없다.
 """
+import colorsys
 import math
 import os
 import pathlib
@@ -43,6 +45,39 @@ def hexcol(s):
 
 def mix(a, b, t):
     return tuple(int(round(a[i] + (b[i] - a[i]) * t)) for i in range(3))
+
+
+def jitter(hexstr, dh, ds, dv):
+    """HSV 공간에서 색조·채도·명도를 조금 밀어준다."""
+    r, g, b = (c / 255 for c in hexcol(hexstr))
+    h, sat, val = colorsys.rgb_to_hsv(r, g, b)
+    h = (h + dh) % 1.0
+    sat = min(1.0, max(0.0, sat * (1 + ds)))
+    val = min(1.0, max(0.0, val * (1 + dv)))
+    r, g, b = colorsys.hsv_to_rgb(h, sat, val)
+    return "#%02X%02X%02X" % (round(r * 255), round(g * 255), round(b * 255))
+
+
+def vary(pal, seed):
+    """같은 카테고리 안에서도 레시피마다 색이 조금씩 다르게 나오도록 흔든다.
+
+    카테고리 정체성(한식은 붉은 계열, 반찬은 초록 계열)은 유지하면서
+    목록에서 카드끼리 구분되게 하는 것이 목적이다. 구도용 rng와 분리해
+    두었으므로 색만 바뀌고 고명 배치는 그대로다.
+    """
+    prng = random.Random("%s-palette" % seed)
+    dh = prng.uniform(-0.055, 0.055)   # 색조 ±20도 정도
+    ds = prng.uniform(-0.16, 0.16)
+    dv = prng.uniform(-0.22, 0.22)     # 썸네일에서는 명도 차이가 가장 잘 보인다
+    out = []
+    for i, c in enumerate(pal):
+        if i == 0:      # 배경 — 카드에서 가장 크게 보이므로 제일 많이 흔든다
+            out.append(jitter(c, dh, ds, dv))
+        elif i == 1:    # 접시 — 크림색은 거의 고정
+            out.append(jitter(c, dh * 0.25, 0.0, dv * 0.15))
+        else:           # 음식과 고명 — 배경과 같은 방향으로 살짝만
+            out.append(jitter(c, dh, ds * 0.6, dv * 0.5))
+    return tuple(out)
 
 
 def circle(d, cx, cy, r, fill):
@@ -160,7 +195,7 @@ def cutlery(d, pal):
 
 
 def make_at(path, seed, category):
-    pal = PALETTES[category]
+    pal = vary(PALETTES[category], seed)
     rng = random.Random(seed)
     img = Image.new("RGB", (W * SS, H * SS))
     d = ImageDraw.Draw(img)
